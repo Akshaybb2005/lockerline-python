@@ -39,3 +39,28 @@ class DoorsOut(BaseModel):
     doors: list[DoorListItem]
 
 
+class DropIn(BaseModel):
+    size_class: SizeClass
+    flat: str = Field(
+        min_length=1,
+        max_length=8,
+        pattern=r"^[0-9A-Za-z-]+$"
+    )
+
+
+class DropOut(BaseModel):
+    parcel_id: str
+    door: str
+    size_class: SizeClass
+    flat: str
+    dropped_at: UtcZ
+
+
+class ParcelOut(BaseModel):
+    parcel_id: str
+    state: Literal["holding", "collected"]
+    door: str
+    size_class: SizeClass
+    flat: str
+    dropped_at: UtcZ
+
